@@ -26,6 +26,12 @@ class FakeAmazonClient:
         return "The camera is fast and camera quality is great."
 
 
+class FakeAmazonClientLongDescription:
+    def fetch_description(self, url: str) -> str:
+        _ = url
+        return "x" * 800
+
+
 class TestCrawlService(unittest.TestCase):
     def test_process_url_processed(self) -> None:
         repository = FakeRepository(is_new=True)
@@ -36,6 +42,23 @@ class TestCrawlService(unittest.TestCase):
         self.assertEqual(result["status"], "processed")
         self.assertGreater(result["new_words"], 0)
         self.assertEqual(len(repository.increment_calls), 1)
+        description = result.get("description")
+        self.assertIsInstance(description, str)
+        self.assertEqual(description, "The camera is fast and camera quality is great.")
+
+    def test_process_url_description_is_limited_to_500(self) -> None:
+        repository = FakeRepository(is_new=True)
+        service = CrawlService(
+            word_repository=repository,
+            amazon_client=FakeAmazonClientLongDescription(),
+        )
+
+        result = service.process_url("https://www.amazon.com/gp/product/B00VVOCSOU")
+
+        description = result.get("description")
+        self.assertIsInstance(description, str)
+        if isinstance(description, str):
+            self.assertEqual(len(description), 500)
 
     def test_process_url_already_seen(self) -> None:
         repository = FakeRepository(is_new=False)

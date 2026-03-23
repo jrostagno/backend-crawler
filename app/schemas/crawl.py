@@ -9,6 +9,7 @@ class CrawlResponse(BaseModel):
     status: str
     url: str
     new_words: int
+    description: str | None = None
 
 
 class TopWord(BaseModel):

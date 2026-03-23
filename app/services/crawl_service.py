@@ -1,5 +1,5 @@
 from urllib.parse import urlparse
-from typing import Mapping, Protocol, Sequence, TypedDict
+from typing import Mapping, NotRequired, Protocol, Sequence, TypedDict
 
 from app.core.text_processing import tokenize_text
 
@@ -23,6 +23,7 @@ class ProcessUrlResult(TypedDict):
     status: str
     url: str
     new_words: int
+    description: NotRequired[str]
 
 
 class TopWordsResult(TypedDict):
@@ -54,7 +55,10 @@ class CrawlService:
         words = tokenize_text(description)
         self._word_repository.increment_word_counts(words)
 
-        return {"status": "processed", "url": url, "new_words": len(words)}
+        result: ProcessUrlResult = {"status": "processed", "url": url, "new_words": len(words)}
+        if description:
+            result["description"] = description[:500]
+        return result
 
     def get_top_words(self, limit: int = 10) -> TopWordsResult:
         """Fetch top N words from repository."""
