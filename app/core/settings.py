@@ -15,6 +15,9 @@ class Settings(BaseSettings):
         "Chrome/124.0.0.0 Safari/537.36"
     )
     request_retries: int = 2
+    rate_limit_crawl_per_minute: int = 10
+    rate_limit_top_words_per_minute: int = 60
+    rate_limit_window_seconds: int = 60
     allowed_origins: str = (
         "http://localhost:8080,http://127.0.0.1:8080,"
         "http://localhost:5173,http://127.0.0.1:5173"

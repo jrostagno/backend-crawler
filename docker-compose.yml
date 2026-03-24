@@ -22,6 +22,9 @@ services:
       - "8000:8000"
     environment:
       CRAWLER_REDIS_URL: redis://redis:6379/0
+      CRAWLER_RATE_LIMIT_CRAWL_PER_MINUTE: 10
+      CRAWLER_RATE_LIMIT_TOP_WORDS_PER_MINUTE: 60
+      CRAWLER_RATE_LIMIT_WINDOW_SECONDS: 60
       CRAWLER_ALLOWED_ORIGINS: http://localhost:8080,http://127.0.0.1:8080,http://localhost:5173,http://127.0.0.1:5173
       CRAWLER_LOG_LEVEL: INFO
       CRAWLER_ENV: docker
