@@ -37,6 +37,23 @@ source .venv/bin/activate
 uvicorn main:app --reload
 ```
 
+## Run with Docker (one command)
+
+From project root:
+
+```bash
+docker compose up --build
+```
+
+API will be available at `http://localhost:8000`.
+
+Useful commands:
+
+```bash
+docker compose down
+docker compose logs -f backend
+```
+
 ## Environment variables
 
 All variables are optional and use defaults if not provided.

@@ -1,0 +1,27 @@
+services:
+  redis:
+    image: redis:7
+    container_name: crawler-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crawler-backend
+    depends_on:
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      CRAWLER_REDIS_URL: redis://redis:6379/0
+      CRAWLER_ALLOWED_ORIGINS: http://localhost:5173,http://127.0.0.1:5173
+      CRAWLER_LOG_LEVEL: INFO
+      CRAWLER_ENV: docker
