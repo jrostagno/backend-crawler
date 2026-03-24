@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -6,14 +8,13 @@ from app.core.settings import settings
 
 app = FastAPI(title=settings.app_name)
 
-origins = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+logging.basicConfig(
+    level=getattr(logging, settings.log_level.upper(), logging.INFO),
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=settings.cors_allowed_origins,
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],

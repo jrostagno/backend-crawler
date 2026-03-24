@@ -46,7 +46,11 @@ All variables are optional and use defaults if not provided.
 - `CRAWLER_REDIS_SEEN_PREFIX=crawler:seen`
 - `CRAWLER_REDIS_WORD_SCORES_KEY=crawler:word_scores`
 - `CRAWLER_CRAWL_TIMEOUT_SECONDS=10`
+- `CRAWLER_CRAWL_USER_AGENT=Mozilla/5.0 (...)`
 - `CRAWLER_REQUEST_RETRIES=2`
+- `CRAWLER_ALLOWED_ORIGINS=http://localhost:5173,http://127.0.0.1:5173`
+- `CRAWLER_LOG_LEVEL=INFO`
+- `CRAWLER_ENV=development`
 
 ## API examples
 
