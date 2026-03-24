@@ -1,7 +1,7 @@
 #!/bin/sh
 
 SERVER=$1
-PORT=$2
+PORT=$2/crawl
 PARAM=$3
 SLEEP_TIME=$4
 

@@ -44,14 +44,6 @@ def _crawl_product_url(
         raise HTTPException(status_code=502, detail=str(error)) from error
 
 
-@router.post("/")
-def crawl_url_root(
-    product_url: HttpUrl = Query(alias="productUrl"),
-    service: CrawlService = Depends(get_crawl_service),
-) -> CrawlResponse:
-    return _crawl_product_url(product_url=product_url, service=service)
-
-
 @router.post("/crawl")
 def crawl_url(
     product_url: HttpUrl = Query(alias="productUrl"),

@@ -56,12 +56,6 @@ All variables are optional and use defaults if not provided.
 curl -X POST "http://localhost:8000/crawl?productUrl=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fproduct%2FB00VVOCSOU"
 ```
 
-The challenge script style is also supported:
-
-```bash
-curl -X POST "http://localhost:8000?productUrl=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fproduct%2FB00VVOCSOU"
-```
-
 ### Get top words
 
 ```bash
