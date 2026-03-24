@@ -15,7 +15,10 @@ class Settings(BaseSettings):
         "Chrome/124.0.0.0 Safari/537.36"
     )
     request_retries: int = 2
-    allowed_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
+    allowed_origins: str = (
+        "http://localhost:8080,http://127.0.0.1:8080,"
+        "http://localhost:5173,http://127.0.0.1:5173"
+    )
     log_level: str = "INFO"
     env: str = "development"
 
