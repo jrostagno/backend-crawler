@@ -88,7 +88,35 @@ curl "http://localhost:8000/words/top?limit=10"
 
 ## Run tests
 
+This project now has two test styles:
+
+1. Unit tests (existing, based on `unittest`)
+2. Controller integration-flow tests (new, based on `pytest`) where external HTTP is mocked
+
+### 1) Unit tests (unittest)
+
 ```bash
 source .venv/bin/activate
 python -m unittest discover -s tests -v
+```
+
+### 2) Integration-flow tests for controller (pytest)
+
+Install pytest once:
+
+```bash
+source .venv/bin/activate
+pip install pytest
+```
+
+Run only the new pytest integration tests:
+
+```bash
+pytest -q tests/test_crawl_controller_integration.py
+```
+
+Run all pytest tests (if you add more in the future):
+
+```bash
+pytest -q
 ```
